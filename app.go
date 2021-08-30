@@ -19,7 +19,8 @@ func helloWorldHandler(ctx *fiber.Ctx) error {
 	return ctx.SendString("Hello World")
 }
 
-func main() {
+// Create routes and apply handlers to initialize Fiber app
+func initApp() *fiber.App {
 	// Create a new Fiber instance
 	app := fiber.New()
 
@@ -31,6 +32,14 @@ func main() {
 
 	// A simple hello world request at `/api/v1/hello-world`
 	v1.Get("/hello-world", helloWorldHandler)
+
+	// Return the application
+	return app
+}
+
+func main() {
+	// Initialize the application
+	app := initApp()
 
 	// Listen for HTTP requests at `http://localhost:3000`
 	app.Listen(":3000")
