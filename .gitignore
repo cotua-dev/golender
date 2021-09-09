@@ -1,0 +1,8 @@
+# environment variables
+.env
+
+# postgres data
+db/*
+
+# build file
+golender.exe
