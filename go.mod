@@ -1,4 +1,4 @@
-module github.com/golender
+module github.com/cotua-dev/golender
 
 go 1.17
 
