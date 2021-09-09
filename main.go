@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/compress"
 )
 
 // Handler functions
@@ -22,6 +23,9 @@ func helloWorldHandler(ctx *fiber.Ctx) error {
 func initApp() *fiber.App {
 	// Create a new Fiber instance
 	app := fiber.New()
+
+	// Use compression middleware
+	app.Use(compress.New())
 
 	// Create `/api` group
 	api := app.Group("/api", apiHandler)
