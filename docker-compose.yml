@@ -1,0 +1,48 @@
+version: '3.9'
+
+services:
+    golender:
+        build: .
+        ports:
+            - 2658:3000
+        restart: always
+        networks:
+            - golender_network
+
+    golender_web_server:
+        build: ./nginx
+        ports:
+            - 80:80
+        depends_on:
+            - golender
+        networks:
+            - golender_network
+
+    golender_db:
+        image: postgres
+        restart: always
+        ports:
+            - 5432:5432
+        volumes:
+            - ./db:/var/lib/postgresql/data
+        networks:
+            - golender_network
+        environment:
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_DB: ${DB_NAME}
+
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - 4976:8080
+        networks:
+            - golender_network
+
+networks:
+    golender_network:
+        driver: bridge
+
+volumes:
+    golender_volume: {}
