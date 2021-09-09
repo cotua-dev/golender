@@ -3,3 +3,6 @@
 
 # postgres data
 db/*
+
+# build file
+golender.exe
