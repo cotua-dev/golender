@@ -5,7 +5,6 @@ import (
 )
 
 // Handler functions
-
 func apiHandler(ctx *fiber.Ctx) error {
 	return ctx.Next()
 }
