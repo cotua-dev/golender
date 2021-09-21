@@ -1,8 +1,10 @@
 package main
 
 import (
+	"github.com/cotua-dev/golender/database"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/compress"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 // Handler functions
@@ -27,6 +29,9 @@ func initApp() *fiber.App {
 	// Use compression middleware
 	app.Use(compress.New())
 
+	// Use cors middleware
+	app.Use(cors.New())
+
 	// Create `/api` group
 	api := app.Group("/api", apiHandler)
 
@@ -41,6 +46,9 @@ func initApp() *fiber.App {
 }
 
 func main() {
+	// Initialize connection to database
+	database.InitDB()
+
 	// Initialize the application
 	app := initApp()
 
